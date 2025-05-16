@@ -1,0 +1,79 @@
+/* Estilos generales */
+body {
+    font-family: 'Arial', sans-serif;
+    padding-top: 56px; /* Espacio para la barra de navegación fija */
+}
+
+/* Estilos para la barra de navegación */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.btn-link {
+    color: #212529;
+}
+
+/* Sección principal con imagen de fondo */
+.seccion-principal {
+    height: calc(100vh - 56px);
+    background-image: url('./src/image/FONDO-FERRAMAS.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.seccion-principal::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.contenedor-principal {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.titulo-principal {
+    color: white;
+    font-size: 4rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    letter-spacing: 2px;
+}
+
+.btn-ver-catalogo {
+    border: 2px solid white;
+    padding: 0.5rem 2rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-ver-catalogo:hover {
+    background-color: white;
+    color: #212529;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .titulo-principal {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .titulo-principal {
+        font-size: 2.5rem;
+    }
+}

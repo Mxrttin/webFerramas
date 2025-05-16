@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crear cuenta - Ferramas</title>
+    <title>Inicio de Sesión - Ferramas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <link rel="stylesheet" href="../estilos.css">
+    <link rel="stylesheet" href="./registro-styles.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">Ferramas</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Catalogo/catalogo.html">Catalogo</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button class="btn btn-link" type="button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button class="btn btn-link" type="button">
+                        <i class="fas fa-user"></i>
+                    </button>
+                    <button class="btn btn-link" type="button">
+                        <a href="../Carrito/carrito.html" class="text-dark">
+                            <i class="fas fa-shopping-cart"></i>
+                        </a>   
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container contenedor-registro">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <div class="tajeta-registro">
+                    <h2 class="registro text-center mb-4 mt-5">Crear cuenta</h2>
+
+                    <form id="formulario-registro">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="nombre" placeholder="Nombre y apellido" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="rut" placeholder="RUT (sin puntos ni guion)" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <input type="email" class="form-control" id="email" placeholder="Correo electrónico" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <input type="tel" class="form-control" id="telefono" placeholder="Teléfono (9 1234 5678)" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <input type="password" class="form-control" id="password" placeholder="Contraseña (Mínimo 8 caracteres)" required>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-dark btn-registro" id="btn-registro">Crear cuenta</button>
+                        </div>
+
+                        <div id="contenedor-mensaje" class="mt-3 "></div>
+                    </form>
+
+                    <div class="text-center mt-3">
+                        <a href="../Login/login.html" class="text-dark">¿Ya tienes una cuenta? Iniciar sesión</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+  <script src="./registro-script.js"></script>
+  <script src="./cheque-sesion.js"></script>
+</body>
+</html>

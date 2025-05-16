@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Cuenta - Ferramas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <link rel="stylesheet" href="./cuenta-styles.css">
+    <link rel="stylesheet" href="../estilos.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">Ferramas</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Catalogo/catalogo.html">Catalogo</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button class="btn btn-link text-dark" type="button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button class="btn btn-link" type="button">
+                        <a id="cuenta-enlace" class="text-dark">
+                            <i class="fas fa-user"></i>
+                        </a>
+                    </button>
+                    <button class="btn btn-link text-dark" type="button">
+                        <a href="../Carrito/carrito.html" class="text-dark">
+                            <i class="fas fa-shopping-cart"></i>
+                        </a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container contenedor-cuenta">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h1 class="titulo-cuenta">Cuenta</h1>
+                <a href="../index.html" id="cerrar-sesion" class="enlace-cerrar-sesion">
+                    <i class="fas fa-sign-out-alt me-1 text-dark" ></i> Cerrar sesión
+                </a>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 mb-4">
+                <div class="tarjeta-cuenta">
+                    <h2 class="subtitulo-cuenta">Historial de pedidos</h2>
+                    <div class="tabla-responsive">
+                        <table class="table tabla-pedidos">
+                            <thead>
+                                <tr>
+                                    <th>PEDIDO</th>
+                                    <th>FECHA</th>
+                                    <th>ESTADO DE PREPARACIÓN DEL PEDIDO</th>
+                                    <th>TOTAL</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="4" class="sin-pedidos">No tienes pedidos realizados aún.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="tarjeta-cuenta">
+                    <h2 class="subtitulo-cuenta">Detalles de la cuenta</h2>
+                    <div class="detalles-usuario">
+                        <!-- cargan desde JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./cuenta-script.js"></script>
+</body>
+</html>

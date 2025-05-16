@@ -1,0 +1,84 @@
+.contenedor-cuenta {
+    padding-top: 40px;
+    padding-bottom: 60px;
+}
+
+.titulo-cuenta {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.enlace-cerrar-sesion {
+    color: #6c757d;
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.enlace-cerrar-sesion:hover {
+    color: #212529;
+    text-decoration: underline;
+}
+
+.tarjeta-cuenta {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    height: 100%;
+}
+
+.subtitulo-cuenta {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.tabla-pedidos {
+    margin-bottom: 0;
+}
+
+.tabla-pedidos th {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #6c757d;
+    border-top: none;
+}
+
+.tabla-pedidos td {
+    vertical-align: middle;
+    font-size: 0.9rem;
+}
+
+.sin-pedidos {
+    text-align: center;
+    padding: 20px;
+    color: #6c757d;
+}
+
+.detalles-usuario {
+    font-size: 1rem;
+}
+
+.nombre-usuario {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.enlace-admin {
+    display: block;
+    color: #212529;
+    text-decoration: none;
+    margin-top: 10px;
+    font-weight: 500;
+}
+
+.enlace-admin:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
