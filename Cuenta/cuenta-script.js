@@ -82,6 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
     }
   }
+  
 
   const botonCerrarSesion = document.getElementById("cerrar-sesion");
   if (botonCerrarSesion) {
