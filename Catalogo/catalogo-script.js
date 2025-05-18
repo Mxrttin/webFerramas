@@ -3,41 +3,46 @@ document.addEventListener("DOMContentLoaded", () => {
     const params = new URLSearchParams(window.location.search);
     const idCategoria = params.get("id_categoria");
 
-    fetch("http://localhost:3000/categorias")
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                cartaCategoria.innerHTML = ""; 
 
-                data.categorias.forEach(categoria => {
-                    const detalleHTML = `
-                        <div class="col-md-4 mb-4">
-                            <div class="tarjeta-categoria">
-                                <div class="imagen-categoria">
-                                    <img src="${categoria.foto}" class="img-fluid" alt="${categoria.nombre}">
-                                    <div class="overlay-categoria">
-                                        <h3 class="texto-categoria ">${categoria.nombre}</h3>
+    if(cartaCategoria){
+        fetch("http://localhost:3000/api/categorias")
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    cartaCategoria.innerHTML = ""; 
+
+                    data.categorias.forEach(categoria => {
+                        const detalleHTML = `
+                            <div class="col-md-4 mb-4">
+                                <div class="tarjeta-categoria">
+                                    <div class="imagen-categoria">
+                                        <img src="${categoria.foto}" class="img-fluid" alt="${categoria.nombre}">
+                                        <div class="overlay-categoria">
+                                            <h3 class="texto-categoria ">${categoria.nombre}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="pie-categoria">
+                                        <a href="./producto-catalogo.html?id_categoria=${categoria.id_categoria}" class="enlace-categoria text-dark">${categoria.nombre}<i class="fas fa-arrow-right"></i></a>
                                     </div>
                                 </div>
-                                <div class="pie-categoria">
-                                    <a href="./producto-catalogo.html?id_categoria=${categoria.id_categoria}" class="enlace-categoria text-dark">${categoria.nombre}<i class="fas fa-arrow-right"></i></a>
-                                </div>
                             </div>
-                        </div>
-                    `;
-                    cartaCategoria.innerHTML += detalleHTML;
-                });
-            } else {
-                console.error("Error en la respuesta de categorías:", data);
-            }
-        })
-        .catch(error => {
-            console.error("Error al cargar categorías:", error);
+                        `;
+                        cartaCategoria.innerHTML += detalleHTML;
+                    });
+                } else {
+                    console.error("Error en la respuesta de categorías:", data);
+                }
+            })
+            .catch(error => {
+                console.error("Error al cargar categorías:", error);
         });
+
+    }
+    
 
 
     if (idCategoria) {
-    fetch(`http://localhost:3000/categorias/${idCategoria}`)
+    fetch(`http://localhost:3000/api/categorias/${idCategoria}`)
         .then(response => response.json())
         .then(data => {
             if (data.success) {

@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  fetch("http://localhost:3000/direccion", {
+  fetch("http://localhost:3000/api/direccion/direccionUsuario", {
     headers: {
       "Authorization": "Bearer " + token,
       "Content-Type": "application/json"
@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const nuevaRegion = document.getElementById("region").value.trim();
 
         try {
-          const response = await fetch(`http://localhost:3000/modificarDireccion/${id_usuario}`, {
+          const response = await fetch(`http://localhost:3000/api/direccion/modificarDireccion/${id_usuario}`, {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",

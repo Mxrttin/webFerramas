@@ -35,8 +35,20 @@ document.addEventListener("DOMContentLoaded", () => {
             const region = document.getElementById("region").value;
             const id_usuario = idUsuario;
 
+
+            if (!direccion || !comuna || !ciudad || !region) {
+                mostrarMensaje("Por favor completa todos los campos obligatorios.", true);
+                return;
+            }
+
+            if (direccion.trim().length < 5 || comuna.trim().length < 4 || ciudad.trim().length < 4 || region.trim().length < 5) {
+                mostrarMensaje("Por favor completa todos los campos correctamente.", true);
+                return;
+            }
+
+
             try {
-                const response = await fetch("http://localhost:3000/agregarDireccion",{
+                const response = await fetch("http://localhost:3000/api/direccion/agregarDireccion",{
                     method: "PUT",
                     headers: {"Content-Type": "application/json"},
                     body: JSON.stringify({direccion,comuna,ciudad,region,id_usuario})

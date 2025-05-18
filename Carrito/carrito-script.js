@@ -28,9 +28,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         
         if (datosUsuario) {
             
-            console.log("Intentando obtener carrito para rut:", datosUsuario.rut);
-            
-            const response = await fetch(`http://localhost:3000/carrito/${datosUsuario.rut}`, {
+            const response = await fetch(`http://localhost:3000/api/carrito/${datosUsuario.id_usuario}`, {
                 method: "GET",
                 headers: { "Content-Type": "application/json" }
             });
@@ -53,7 +51,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (data.success) {
             const cuerpoTabla = document.getElementById("items-carrito");
             
-            // Variables para calcular totales
             let subtotal = 0;
             
             if (cuerpoTabla) {
@@ -64,7 +61,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                         </tr>
                     `;
                     
-                    // Si no hay productos, establecer subtotal en 0
                     subtotal = 0;
                 } else {
                     let htmlCarrito = "";
@@ -122,10 +118,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         const token = localStorage.getItem("token");
         const datosUsuario = parseJwt(token);
 
-        rut_usuario = datosUsuario.rut
+        id_usuario = datosUsuario.id_usuario
 
         try {
-            const res = await fetch(`http://localhost:3000/carrito/${rut_usuario}/${id_producto}`, {
+            const res = await fetch(`http://localhost:3000/api/carrito/${id_usuario}/${id_producto}`, {
                 method: "DELETE",
             });
 
@@ -137,7 +133,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                 location.reload(); 
             } else {
-                alert("No se pudo eliminar el producto: " + result.error);
+                mostrarMensajeError("No se pudo eliminar el producto");
+                console.error("No se pudo eliminar el producto: " + result.error)
             }
         } catch (err) {
             console.error("Error al eliminar producto:", err);

@@ -91,8 +91,29 @@ document.addEventListener("DOMContentLoaded", ()=>{
                 return;  
             }
 
+            if(!nombre || nombre.lenght < 3){
+                mostrarMensaje("El nombre es obligatorio y debe tener al menos 3 carcteres.",true)
+                return
+            }
+
+            if (!rut || rut.length < 8 || !/^\d+k?$/.test(rut.toLowerCase())) {
+                mostrarMensaje("El RUT es obligatorio y debe tener un formato válido (sin puntos ni guión).", true);
+                return;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!email || !emailRegex.test(email)) {
+                mostrarMensaje("El correo electrónico no es válido.", true);
+                return;
+            }
+
+            if (!telefono || telefono.length < 8) {
+                mostrarMensaje("El número de teléfono debe tener al menos 8 dígitos.", true);
+                return;
+            }
+
             try{
-                const response = await fetch("http://localhost:3000/registroUsuario", {
+                const response = await fetch("http://localhost:3000/api/auth/registroUsuario", {
                     method: "PUT",
                     headers: { "Content-Type": "application/json"},
                     body: JSON.stringify({nombre,rut,correo: email, telefono, clave: password})
@@ -101,7 +122,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                 const data = await response.json();
 
                 if(data.success){
-                    mostrarMensaje("Usuario creado con exito.", false);
+                    mostrarMensaje("Usuario creado con exito.", true);
                     setTimeout(() => {
                         window.location.href = "../Login/login.html";
                     }, 5000);

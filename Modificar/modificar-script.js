@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     async function cargarProductos() {
         try {
-            const respuesta = await fetch("http://localhost:3000/productos", {
+            const respuesta = await fetch("http://localhost:3000/api/productos", {
                 method: "GET",
                 headers: { "Content-Type": "application/json" }
             });

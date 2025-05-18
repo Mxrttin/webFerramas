@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
     async function cargarDetalleProducto(id) {
         try {
-            const response = await fetch(`http://localhost:3000/productos/${id}`, {
+            const response = await fetch(`http://localhost:3000/api/productos/${id}`, {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
             });
@@ -107,9 +107,14 @@ document.addEventListener("DOMContentLoaded", () => {
             const categoria = document.getElementById("categoria").value;
             const foto = document.getElementById("foto").value;
 
+            if (!categoria || categoria === "Selecciona una categoría") {
+                mostrarMensaje("Debes seleccionar una categoría válida.");
+            return;
+}
+
             try {
                 const id = producto.id_producto;
-                const response = await fetch(`http://localhost:3000/modificarProducto/${id}`, {
+                const response = await fetch(`http://localhost:3000/api/productos/modificarProducto/${id}`, {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ nombre, descripcion, marca, precio, cantidad, categoria, foto })
@@ -134,7 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     async function cargarCategorias() {
         try {
-            const response = await fetch("http://localhost:3000/categorias");
+            const response = await fetch("http://localhost:3000/api/categorias");
             const data = await response.json();
             
             const selectCategoria = document.getElementById("categoria");
@@ -154,7 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } catch (error) {
             console.error("Error al cargar categorías:", error);
         }
-    }
+    };
 
     function mostrarMensaje(mensaje, esError) {
         const contenedorMensaje = document.getElementById("contenedor-mensaje") || crearContenedorMensaje();

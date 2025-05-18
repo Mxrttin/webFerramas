@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function cargarDetalleProducto(id) {
     try {
-      const respuesta = await fetch(`http://localhost:3000/productos/${id}`, {
+      const respuesta = await fetch(`http://localhost:3000/api/productos/${id}`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       })
@@ -176,11 +176,12 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
       
-      rutUsuario = datosUsuario.rut
+      idUsuario = datosUsuario.id_usuario
+      
       
       try {
         
-        if (!rutUsuario) {
+        if (!idUsuario) {
           throw new Error("No se pudo obtener el RUT del usuario");
         }
       } catch (error) {
@@ -193,11 +194,11 @@ document.addEventListener("DOMContentLoaded", () => {
       mostrarMensaje("Agregando al carrito...", false);
       
 
-      const respuesta = await fetch("http://localhost:3000/carrito/agregar", {
+      const respuesta = await fetch("http://localhost:3000/api/carrito/agregar", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          rut_usuario: rutUsuario,
+          id_usuario: idUsuario,
           id_producto: idProducto,
           cantidad: cantidad
         })

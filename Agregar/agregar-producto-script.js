@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const selectCategoria = document.getElementById("categoria");
 
-    fetch("http://localhost:3000/categorias")
+    fetch("http://localhost:3000/api/categorias")
         .then(response => response.json())
         .then(data => {
             if (data.success) {
@@ -38,8 +38,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const foto = document.getElementById("foto").value;
 
             try {
-                const response = await fetch("http://localhost:3000/agregarProductos", {
-                    method: "PUT",
+                const response = await fetch("http://localhost:3000/api/productos/agregarProducto", {
+                    method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ nombre, descripcion, marca, precio, cantidad, categoria, foto })
                 });
