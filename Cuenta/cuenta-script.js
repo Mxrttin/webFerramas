@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <a href="../Modificar/modificar_productos.html" class="enlace-admin mt-2">
             <i class="fas fa-edit me-2 text-dark"></i>Modificar productos
           </a>
-          <a href="../Modificar/modificar_productos.html" class="enlace-admin mt-2">
+          <a href="../Admin_pedidos/admin_pedidos.html" class="enlace-admin mt-2">
             <i class="bi bi-card-list me-2 text-dark"></i>Visualizar pedidos
           </a>
           <br>
@@ -114,12 +114,24 @@ document.addEventListener("DOMContentLoaded", () => {
             <td>${new Date(pedido.fecha_pedido).toLocaleDateString()}</td>
             <td>${pedido.estado}</td>
             <td>$${pedido.total}</td>
-            <td><a href="#" class="text-dark" >Ver detalle</a></td>
-            
+            <td><a href="#" class="text-dark ver-detalle" data-id="${pedido.id_pedido}">Ver detalle</a></td>
           `;
 
           tablaBody.appendChild(fila);
         });
+
+        // Agregar el listener UNA sola vez, delegando en el contenedor
+        tablaBody.addEventListener("click", (e) => {
+          if (e.target.classList.contains("ver-detalle")) {
+            e.preventDefault();
+            const idPedido = e.target.getAttribute("data-id");
+            window.location.href = `../Detalle_pedido/detalle_pedido.html?id=${idPedido}`;
+          }
+        });
+
+
+        
+
       } else {
         tablaBody.innerHTML = `
           <tr>
@@ -135,7 +147,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   cargarPedidos(datosUsuario.id_usuario);
 
-  // Evento cerrar sesión
   const botonCerrarSesion = document.getElementById("cerrar-sesion");
   if (botonCerrarSesion) {
     botonCerrarSesion.addEventListener("click", (e) => {
