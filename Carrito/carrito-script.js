@@ -112,37 +112,82 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
     document.querySelectorAll(".eliminar-item").forEach(button => {
-    button.addEventListener("click", async (event) => {
-        const fila = event.target.closest("tr");
-        const id_producto = fila.getAttribute("data-id");
-        const token = localStorage.getItem("token");
-        const datosUsuario = parseJwt(token);
+        button.addEventListener("click", async (event) => {
+            const fila = event.target.closest("tr");
+            const id_producto = fila.getAttribute("data-id");
+            const token = localStorage.getItem("token");
+            const datosUsuario = parseJwt(token);
 
-        id_usuario = datosUsuario.id_usuario
+            id_usuario = datosUsuario.id_usuario
 
-        try {
-            const res = await fetch(`http://localhost:3000/api/carrito/${id_usuario}/${id_producto}`, {
-                method: "DELETE",
-            });
+            try {
+                const res = await fetch(`http://localhost:3000/api/carrito/${id_usuario}/${id_producto}`, {
+                    method: "DELETE",
+                });
 
-            const result = await res.json();
+                const result = await res.json();
 
-            if (res.ok && result.success) {
-                
-                fila.remove();
+                if (res.ok && result.success) {
+                    
+                    fila.remove();
 
-                location.reload(); 
-            } else {
-                mostrarMensajeError("No se pudo eliminar el producto");
-                console.error("No se pudo eliminar el producto: " + result.error)
+                    location.reload(); 
+                } else {
+                    mostrarMensajeError("No se pudo eliminar el producto");
+                    console.error("No se pudo eliminar el producto: " + result.error)
+                }
+            } catch (err) {
+                console.error("Error al eliminar producto:", err);
+                mostrarMensajeError("Ocurrió un error al intentar eliminar el producto.");
             }
-        } catch (err) {
-            console.error("Error al eliminar producto:", err);
-            mostrarMensajeError("Ocurrió un error al intentar eliminar el producto.");
-        }
-        
+            
+        });
     });
+
+    document.getElementById("btn-finalizar").addEventListener("click", async (event) => {
+    event.preventDefault();
+
+    const token = localStorage.getItem("token");
+    const datosUsuario = parseJwt(token);
+
+    if (!datosUsuario || !datosUsuario.id_usuario) {
+        mostrarMensajeError("Debes iniciar sesión para finalizar la compra.");
+        return;
+    }
+
+    const totalTexto = document.getElementById("total-carrito").textContent;
+    const monto = parseInt(totalTexto.replace(/\D/g, ""), 10); 
+
+    try {
+        const response = await fetch("http://localhost:3000/api/carrito/pagar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                id_usuario: datosUsuario.id_usuario,
+                total: monto
+            })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            mostrarMensajeError("¡Compra finalizada con éxito!");
+
+            setTimeout(() => {
+                window.location.href = "../Cuenta/cuenta.html"; 
+            }, 2000);
+        } else {
+            mostrarMensajeError("Error al finalizar la compra: " + data.message);
+            console.error(data);
+        }
+    } catch (err) {
+        console.error("Error al crear la transacción:", err);
+        mostrarMensajeError("Ocurrió un error al intentar finalizar la compra.");
+    }
 });
+
 
 
 

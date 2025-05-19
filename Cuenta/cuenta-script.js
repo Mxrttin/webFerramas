@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const datosUsuario = parseJwt(token);
-  console.log('RUT del usuario:', datosUsuario.rut);
+  console.log('id del usuario:', datosUsuario.id_usuario);
 
   if (!datosUsuario) {
     localStorage.removeItem("token");
@@ -42,10 +42,11 @@ document.addEventListener("DOMContentLoaded", () => {
       <p id="direccion-text">Cargando dirección...</p>
     `;
 
+
     // Cargar dirección
-    fetch("http://localhost:3000/api/direccion/direccionUsuario", {
+    fetch(`http://localhost:3000/api/direccion/direccionUsuario`, {
       headers: {
-        'Authorization': 'Bearer ' + token,
+        'Authorization': 'Bearer ' + `${token}`,
         'Content-Type': 'application/json'
       }
     })
@@ -73,11 +74,15 @@ document.addEventListener("DOMContentLoaded", () => {
     if (datosUsuario.rol === 1) {
       detallesUsuario.innerHTML += `
         <div class="mt-4">
+          <h5 class="mt-5">Menu administrador</h5>
           <a href="../Agregar/agregar_producto.html" class="enlace-admin">
             <i class="fas fa-plus-circle me-2 text-dark"></i>Agregar productos
           </a>
           <a href="../Modificar/modificar_productos.html" class="enlace-admin mt-2">
             <i class="fas fa-edit me-2 text-dark"></i>Modificar productos
+          </a>
+          <a href="../Modificar/modificar_productos.html" class="enlace-admin mt-2">
+            <i class="bi bi-card-list me-2 text-dark"></i>Visualizar pedidos
           </a>
           <br>
         </div>
@@ -86,8 +91,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Función para cargar pedidos y mostrar en tabla
-  function cargarPedidos(rutUsuario) {
-    fetch(`http://localhost:3000/api/pedidos/${rutUsuario}`, {
+  function cargarPedidos(idUsuario) {
+    fetch(`http://localhost:3000/api/pedidos/${idUsuario}`, {
       headers: {
         'Authorization': 'Bearer ' + token,
         'Content-Type': 'application/json'
@@ -108,7 +113,9 @@ document.addEventListener("DOMContentLoaded", () => {
             <td>${pedido.id_pedido}</td>
             <td>${new Date(pedido.fecha_pedido).toLocaleDateString()}</td>
             <td>${pedido.estado}</td>
-            <td>$${pedido.total.toFixed(2)}</td>
+            <td>$${pedido.total}</td>
+            <td><a href="#" class="text-dark" >Ver detalle</a></td>
+            
           `;
 
           tablaBody.appendChild(fila);
@@ -126,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  cargarPedidos(datosUsuario.rut);
+  cargarPedidos(datosUsuario.id_usuario);
 
   // Evento cerrar sesión
   const botonCerrarSesion = document.getElementById("cerrar-sesion");
