@@ -1,4 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+  //localStorage.removeItem("isLoggedIn"); no tocar hasta ultimo aviso 
+  //localStorage.removeItem("datosUsuario"); no tocar hasta ultimo aviso
+
   const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
   const cuentaLink = document.getElementById("cuenta-enlace");
 
@@ -10,3 +14,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 });
+
+

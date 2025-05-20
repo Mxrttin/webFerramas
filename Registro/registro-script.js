@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const formulario = document.getElementById("formulario-registro");
     const passwordInput = document.getElementById("password");
+    const telefonoInput = document.getElementById("telefono");
 
     if (passwordInput) {
         passwordInput.addEventListener("input", (e) => {
@@ -53,10 +54,32 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            if (!telefono || telefono.length < 9 || telefono.length > 9) {
-                mostrarMensaje("El número de teléfono debe tener 9 dígitos.", true);
-                return;
+            if (telefonoInput) {
+                telefonoInput.addEventListener("input", (e) => {
+                    let value = e.target.value.replace(/[^\d]/g, "");
+                    
+                    // Si ya tiene 9 dígitos, no permitir más entrada
+                    if (value.length >= 9) {
+                        e.target.value = value.slice(0, 9);
+                        e.target.setAttribute("maxlength", "9");
+                        return;
+                    }
+                    
+                    e.target.value = value;
+                });
+
+                // Prevenir pegado de texto no numérico
+                telefonoInput.addEventListener("paste", (e) => {
+                    e.preventDefault();
+                    const pastedText = (e.clipboardData || window.clipboardData).getData('text');
+                    const numbersOnly = pastedText.replace(/[^\d]/g, "").slice(0, 9);
+                    e.target.value = numbersOnly;
+                });
+
+                // Prevenir entrada de más de 9 dígitos
+                telefonoInput.setAttribute("maxlength", "9");
             }
+            
 
             if (password !== confirmarPassword) {
                 mostrarMensaje("Las contraseñas no coinciden.", true);
